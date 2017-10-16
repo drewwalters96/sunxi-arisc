@@ -5,6 +5,7 @@
 
 #include <compiler.h>
 #include <ctype.h>
+#include <debug.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
@@ -108,6 +109,7 @@ vprintf(const char *fmt, va_list args)
 	int width;
 	uintptr_t arg;
 
+	assert(fmt);
 	while ((c = *fmt++)) {
 		if (c != '%') {
 			putc(c);
@@ -149,6 +151,7 @@ conversion:
 				print_unsigned(sign, width, zero, arg);
 				break;
 			default:
+				assert(c);
 				if (c == '0' && width == 0) {
 					zero = true;
 				} else if (isdigit(c)) {
