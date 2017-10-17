@@ -103,11 +103,11 @@ $(objdir)/%.elf $(objdir)/%.map: $(objdir)/%.ld $(objects) | $(objdir)
 	$(M) CCLD $@
 	$(Q) $(CC) $(CFLAGS_ALL) $(LDFLAGS_ALL) -Wl,-Map,$(objdir)/$*.map -o $(objdir)/$*.elf -T $^
 
-$(objdir)/%.ld: $(srcdir)/scripts/%.ld.S $(includes) | $(objdir)
+$(objdir)/%.ld: $(srcdir)/scripts/%.ld.S $(incdirs) $(includes) | $(objdir)
 	$(M) CPP $@
 	$(Q) $(CPP) $(CPPFLAGS_ALL) -o $@ -P $<
 
-$(objdir)/%.o: $(srcdir)/% $(includes) | $(objdirs)
+$(objdir)/%.o: $(srcdir)/% $(incdirs) $(includes) | $(objdirs)
 	$(M) CC $@
 	$(Q) $(CC) $(CPPFLAGS_ALL) $(CFLAGS_ALL) -c -o $@ $<
 
