@@ -7,6 +7,14 @@
 #ifndef ASSEMBLER_S
 #define ASSEMBLER_S
 
+	/* This macro is used to mark a global data declaration. */
+	.macro data name
+	.section .data.\name, "aw", @progbits
+	.global \name
+	.type \name, %object
+\name:
+	.endm
+
 	/* This macro is used to mark the beginning of a function. */
 	.macro func name
 	.section .text.\name, "ax", @progbits
