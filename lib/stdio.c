@@ -97,6 +97,7 @@ puts(const char *s)
 {
 	char c;
 
+	assert(s);
 	while ((c = *s++))
 		putc(c);
 }
@@ -144,8 +145,9 @@ conversion:
 				print_hex(width, zero, arg);
 				break;
 			case 's':
-				fill(width - strlen((char *) arg), zero);
-				puts((char *) arg);
+				assert(arg);
+				fill(width - strlen((const char *) arg), zero);
+				puts((const char *) arg);
 				break;
 			case 'u':
 				print_unsigned(sign, width, zero, arg);
