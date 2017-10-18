@@ -4,9 +4,37 @@
  */
 
 #include <compiler.h>
+#include <ctype.h>
 #include <debug.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <types.h>
+
+#define BYTES_PER_ROW  16
+#define BYTES_PER_WORD sizeof(uint32_t)
+
+void
+hexdump(uintptr_t addr, uint32_t bytes)
+{
+	uintptr_t start;
+
+	for (start = addr; addr - start < bytes; addr += BYTES_PER_ROW) {
+		uint32_t *words = (uint32_t *)addr;
+		printf("%08x: %08x %08x %08x %08x  ",
+		       addr, words[0], words[1], words[2], words[3]);
+
+		/* The ARISC processor's data lines are swapped in hardware for
+		 * compatibility with the little-endian ARM CPUs. To examine
+		 * individual bytes, we must reverse each group of 4 bytes. */
+		for (uint32_t i = BYTES_PER_WORD - 1; i < BYTES_PER_ROW; --i) {
+			char c = ((char *)addr)[i];
+			putc(isprint(c) ? c : '.');
+			if (i % BYTES_PER_WORD == 0)
+				i += 2 * BYTES_PER_WORD;
+		}
+		putc('\n');
+	}
+}
 
 void
 log(unsigned level, const char *fmt, ...)

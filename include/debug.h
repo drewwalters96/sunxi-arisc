@@ -35,6 +35,7 @@
 #endif /* DEBUG */
 
 noreturn void do_panic(void);
+void hexdump(uintptr_t addr, uint32_t bytes);
 void log(unsigned level, const char *fmt, ...) __printf(2, 3);
 
 #endif /* DEBUG_H */
