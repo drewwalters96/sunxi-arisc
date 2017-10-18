@@ -144,6 +144,10 @@ conversion:
 			print_signed(sign, width, zero, arg);
 			break;
 		case 'p':
+			/* "%p" behaves like "0x%08x". */
+			puts("0x");
+			width = 2 * sizeof(arg);
+			zero  = true;
 		case 'x':
 			print_hex(width, zero, arg);
 			break;
