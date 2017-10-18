@@ -99,6 +99,7 @@ puts(const char *s)
 {
 	char c;
 
+	assert(s);
 	while ((c = *s++))
 		putc(c);
 }
@@ -147,6 +148,7 @@ conversion:
 			print_hex(width, zero, arg);
 			break;
 		case 's':
+			assert(arg);
 			fill(width - strlen((const char *)arg), zero);
 			puts((const char *)arg);
 			break;
