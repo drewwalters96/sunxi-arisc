@@ -18,7 +18,7 @@
 
 #if DEBUG
 #define assert(e)		((void) ((e) || \
-	(panic("\nassertion failed: %s (%s:%d)\n", #e, __FILE__, __LINE__),0)))
+	(panic("assertion failed: %s (%s:%d)", #e, __FILE__, __LINE__),0)))
 #else
 #define assert(e)		((void) 0)
 #endif
