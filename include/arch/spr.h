@@ -2330,4 +2330,25 @@
 /*****************************/
 #define SPR_FPU_GROUP 0x0b
 
+#ifndef __ASSEMBLER__
+
+#include <compiler.h>
+
+static inline uint32_t
+mfspr(uint16_t addr)
+{
+	uint32_t value;
+
+	asm volatile ("l.mfspr %0, r0, %1" : "=r" (value) : "K" (addr));
+	return value;
+}
+
+static inline void
+mtspr(uint16_t addr, uint32_t value)
+{
+	asm volatile ("l.mtspr r0, %1, %0" : : "K" (addr), "r" (value));
+}
+
+#endif /* __ASSEMBLER__ */
+
 #endif /* ARCH_SPR_H */
