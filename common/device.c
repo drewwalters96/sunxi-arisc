@@ -16,15 +16,12 @@ device_model_init(void)
 {
 	int errors = 0, ret;
 
-	for (struct driver *drv = __driver_list; drv < __driver_list_end; ++drv) {
-		assert(drv->init);
-		if ((ret = drv->init()))
+	for (struct driver *drv = __driver_list; drv < __driver_list_end; ++drv)
+		if (drv->init && (ret = drv->init()))
 			panic("failed to initialize driver %s", drv->name);
-	}
-	for (struct device *dev = __device_list; dev < __device_list_end; ++dev) {
+	for (struct device *dev = __device_list; dev < __device_list_end; ++dev)
 		if (device_probe(dev))
 			++errors;
-	}
 	return errors;
 }
 
@@ -63,10 +60,9 @@ device_remove(struct device *dev)
 	assert(dev->drv->remove);
 	if (dev->state != DEVICE_STATE_RUNNING)
 		return 0;
-	for (struct device *child = __device_list; child < __device_list_end; ++child) {
+	for (struct device *child = __device_list; child < __device_list_end; ++child)
 		if (child->parent == dev)
 			return 1;
-	}
 	if ((ret = dev->drv->remove(dev)))
 		goto fail;
 	dev->state = DEVICE_STATE_DISABLED;
