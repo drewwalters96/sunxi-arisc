@@ -34,8 +34,10 @@ static struct driver msgbox_driver __driver = {
 	.remove =	msgbox_remove,
 };
 
-static struct device msgbox_device __device = {
-	.name =		"msgbox",
-	.base =		DEV_MSGBOX,
-	.drv =		&msgbox_driver,
+static struct device msgbox_devices[] __device = {
+	{
+		.name =		"msgbox",
+		.base =		DEV_MSGBOX,
+		.drv =		&msgbox_driver,
+	},
 };
