@@ -5,6 +5,30 @@
 
 #include <assembler.S>
 
+func __bswapsi2
+	l.addi	r6, r0, 0xff
+	l.and	r4, r3, r6
+	l.srli	r3, r3, 8
+	l.slli	r4, r4, 8
+	l.and	r5, r3, r6
+	l.or	r4, r4, r5
+	l.srli	r3, r3, 8
+	l.slli	r4, r4, 8
+	l.and	r5, r3, r6
+	l.or	r4, r4, r5
+	l.srli	r3, r3, 8
+	l.slli	r4, r4, 8
+	l.and	r5, r3, r6
+	l.jr	r9
+	l.or	r11, r4, r5
+endfunc __bswapsi2
+
+func __ctzi2
+	l.fl1	r11, r3
+	l.jr	r9
+	l.addi	r11, r11, -1
+endfunc __ctzi2
+
 /*
  * Optimized implementation of the "shift divisor method" algorithm from
  * T. Rodeheffer. Software Integer Division. Microsoft Research, 2008.
