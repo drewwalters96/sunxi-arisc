@@ -33,6 +33,7 @@
 #define NULL				((void *) 0)
 #define alignas				_Alignas
 #define alignof				_Alignof
+#define asm				__asm__
 #define bool				_Bool
 #define false				0
 #define noreturn			_Noreturn
