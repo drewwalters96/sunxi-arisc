@@ -1,6 +1,6 @@
 /*
  * Copyright © 2012-2017 Samuel Holland <samuel@sholland.org>
- * SPDX-License-Identifier: 0BSD
+ * SPDX-License-Identifier: GPL-2.0
  */
 
 #include <platform/memory.h>
