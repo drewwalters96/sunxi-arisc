@@ -18,6 +18,7 @@ hexdump(uintptr_t addr, uint32_t bytes)
 {
 	uintptr_t start;
 
+	addr &= ~(BYTES_PER_ROW - 1);
 	for (start = addr; addr - start < bytes; addr += BYTES_PER_ROW) {
 		uint32_t *words = (uint32_t *)addr;
 		printf("%08x: %08x %08x %08x %08x  ",
