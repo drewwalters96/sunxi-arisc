@@ -88,6 +88,9 @@ clean:
 	$(M) CLEAN
 	$(Q) rm -rf $(objdir)
 
+format: $(filter-out %.S,$(includes) $(sources) $(toolsources))
+	$(Q) uncrustify -c .uncrustify -l C --no-backup $^
+
 image: $(outputs)
 
 tools: $(tools)
