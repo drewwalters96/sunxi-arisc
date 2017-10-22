@@ -89,7 +89,7 @@ clean:
 	$(Q) rm -rf $(objdir)
 
 format: $(filter-out %.S,$(includes) $(sources) $(toolsources))
-	$(Q) uncrustify -c .uncrustify -l C --no-backup $^
+	$(Q) uncrustify -c .uncrustify -l C -q --no-backup $^
 
 image: $(outputs)
 
