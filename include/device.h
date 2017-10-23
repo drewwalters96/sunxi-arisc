@@ -7,26 +7,36 @@
 #define DEVICE_H
 
 #include <types.h>
+#include <util.h>
+#include <drivers/clock.h>
 
-#define DEVICE_STATE_NEW      0
-#define DEVICE_STATE_RUNNING  1
-#define DEVICE_STATE_DISABLED 2
-#define DEVICE_STATE_ERROR    3
+#define __device __attribute__((section(".device"), used))
+#define __driver __attribute__((section(".driver"), used))
 
-#define __device              __attribute__((section(".device"), used))
-#define __driver              __attribute__((section(".driver"), used))
+enum {
+	DEVICE_FLAG_CRITICAL = BIT(0),
+};
+
+enum {
+	DEVICE_STATE_NEW      = 0,
+	DEVICE_STATE_RUNNING  = 1,
+	DEVICE_STATE_DISABLED = 2,
+	DEVICE_STATE_ERROR    = 3,
+	DEVICE_STATE_MISSING  = 4,
+};
 
 struct driver;
 
 struct device {
-	const char    *name;
-	uintptr_t      base;
-	uintptr_t      clock;
-	uintptr_t      data;
-	struct driver *drv;
-	struct device *parent;
-	uint8_t        class;
-	uint8_t        state;
+	const char         *name;
+	uintptr_t           base;
+	struct clock_device clock;
+	uintptr_t           data;
+	struct driver      *drv;
+	struct device      *parent;
+	uint8_t             flags;
+	uint8_t             irq;
+	uint8_t             state;
 };
 
 struct driver {
@@ -36,8 +46,9 @@ struct driver {
 	int         (*remove)(struct device *dev);
 };
 
-int device_model_init(void);
 int device_probe(struct device *dev);
 int device_remove(struct device *dev);
+void driver_model_exit(void);
+void driver_model_init(void);
 
 #endif /* DEVICE_H */

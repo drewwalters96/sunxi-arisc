@@ -12,6 +12,6 @@ void
 main(void)
 {
 	console_init(DEV_UART0);
-	device_model_init();
+	driver_model_init();
 	info("Hello, world!");
 }
