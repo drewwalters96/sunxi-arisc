@@ -8,7 +8,6 @@
 
 #include <types.h>
 #include <util.h>
-#include <drivers/clock.h>
 
 #define __device __attribute__((section(".device"), used))
 #define __driver __attribute__((section(".driver"), used))
@@ -30,7 +29,6 @@ struct driver;
 struct device {
 	const char         *name;
 	uintptr_t           base;
-	struct clock_device clock;
 	uintptr_t           data;
 	struct driver      *drv;
 	struct device      *parent;
