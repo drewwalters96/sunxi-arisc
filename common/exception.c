@@ -7,6 +7,7 @@
 #include <exception.h>
 #include <types.h>
 #include <arch/exception.h>
+#include <drivers/irqchip.h>
 
 void
 exception_handler(uint32_t number, struct exception_regs *regs)
@@ -15,6 +16,7 @@ exception_handler(uint32_t number, struct exception_regs *regs)
 	case TICK_TIMER_EXCEPTION:
 		break;
 	case EXTERNAL_INTERRUPT:
+		irqchip_irq();
 		break;
 	default:
 		panic("Unhandled exception %d at %p! (lr=%p)",
