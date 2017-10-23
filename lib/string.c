@@ -13,5 +13,6 @@ strlen(const char *s)
 
 	while (*s++)
 		++len;
+
 	return len;
 }

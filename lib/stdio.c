@@ -114,6 +114,7 @@ vprintf(const char *fmt, va_list args)
 	uintptr_t arg;
 
 	assert(fmt);
+
 	while ((c = *fmt++)) {
 		if (c != '%') {
 			putc(c);
