@@ -44,7 +44,7 @@ SECTIONS
   .bss . : ALIGN(16) SUBALIGN(4) {
     __bss_start = .;
     *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.bss*)))
-    . = ALIGN(4);
+    . = ALIGN(16);
     __bss_end = .;
   } >SRAM_A2
 
