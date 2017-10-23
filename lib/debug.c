@@ -44,6 +44,7 @@ log(unsigned level, const char *fmt, ...)
 	va_list     args;
 
 	assert(level <= (DEBUG ? LOG_LEVEL_DEBUG : LOG_LEVEL_INFO));
+
 	switch (level) {
 	case LOG_LEVEL_FATAL:
 		prefix = "FATAL:\t";
@@ -64,6 +65,7 @@ log(unsigned level, const char *fmt, ...)
 		unreachable();
 	}
 	puts(prefix);
+
 	va_start(args, fmt);
 	vprintf(fmt, args);
 	va_end(args);
