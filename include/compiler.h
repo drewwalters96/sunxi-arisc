@@ -30,7 +30,6 @@
 #define unreachable()          __builtin_unreachable()
 
 /* Keywords */
-#define NULL                   ((void *)0)
 #define alignas                _Alignas
 #define alignof                _Alignof
 #define asm                    __asm__

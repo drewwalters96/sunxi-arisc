@@ -59,4 +59,6 @@
 
 #define USHRT_MAX   0xffff
 
+#define WORDSIZE    32
+
 #endif /* LIMITS_H */
