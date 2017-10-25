@@ -32,19 +32,7 @@ exception_vector_\num:
 
 	/* This macro creates an exception vector with a common handler. */
 	.macro	vector_stub num
-	.section .vectors, "ax", @progbits
-	.org EXCEPTION_VECTOR_ADDRESS(\num)
-	.global exception_vector_\num
-	.type exception_vector_\num, %function
-	.func exception_vector_\num
-	.cfi_sections .debug_frame
-	.cfi_startproc
-exception_vector_\num:
-	l.j	exception_stub_\num
-	l.nop
-	.cfi_endproc
-	.endfunc
-	.size exception_vector_\num, . - exception_vector_\num
+vector_jump \num exception_stub_\num
 
 func exception_stub_\num
 	l.addi  r1, r1, -256		# 128b registers, 128b old redzone

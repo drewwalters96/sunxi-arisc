@@ -3,14 +3,15 @@
  * SPDX-License-Identifier: GPL-2.0
  */
 
-#include <compiler.h>
 #include <ctype.h>
 #include <debug.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <types.h>
 
+static void fill(int width, bool zero);
 static void print_decimal(char sign, int width, bool zero, uint32_t num);
 static void print_hex(int width, bool zero, uint32_t num);
 static void print_signed(char sign, int width, bool zero, int32_t num);
@@ -92,16 +93,6 @@ printf(const char *fmt, ...)
 	va_start(args, fmt);
 	vprintf(fmt, args);
 	va_end(args);
-}
-
-void
-puts(const char *s)
-{
-	char c;
-
-	assert(s);
-	while ((c = *s++))
-		putc(c);
 }
 
 void

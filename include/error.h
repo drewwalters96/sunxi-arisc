@@ -12,5 +12,6 @@
 #define EEXIST  (-3) /* The object already exists. */
 #define ENOBUS  (-4) /* The bus for this device does not exist. */
 #define ENODEV  (-5) /* This device does not exist. */
+#define ENOTSUP (-6) /* The operation is not supported. */
 
 #endif /* ERROR_H */

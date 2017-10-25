@@ -12,6 +12,7 @@ CFLAGS_ALL	 = -Os -pipe -std=c11 \
 		   -fdata-sections \
 		   -ffreestanding \
 		   -ffunction-sections \
+		   -flto \
 		   -fno-asynchronous-unwind-tables \
 		   -fno-common \
 		   -fomit-frame-pointer \
@@ -58,7 +59,7 @@ includes	 = $(wildcard $(addsuffix /*.h,$(incdirs)) $(addsuffix /*/*.h,$(incdirs
 
 objdir		 = build
 objdirs		 = $(sort $(dir $(objects)))
-objects		 = $(patsubst $(srcdir)/%,$(objdir)/%.o,$(sources))
+objects		 = $(patsubst $(srcdir)/%,$(objdir)/%.o,$(basename $(sources)))
 
 outputs		 = $(addprefix $(objdir)/,scp.bin scp.elf scp.map)
 
@@ -110,7 +111,11 @@ $(objdir)/%.ld: $(srcdir)/scripts/%.ld.S $(incdirs) $(includes) | $(objdir)
 	$(M) CPP $@
 	$(Q) $(CPP) $(CPPFLAGS_ALL) -o $@ -P $<
 
-$(objdir)/%.o: $(srcdir)/% $(incdirs) $(includes) | $(objdirs)
+$(objdir)/%.o: $(srcdir)/%.c $(incdirs) $(includes) | $(objdirs)
+	$(M) CC $@
+	$(Q) $(CC) $(CPPFLAGS_ALL) $(CFLAGS_ALL) -c -o $@ $<
+
+$(objdir)/%.o: $(srcdir)/%.S $(incdirs) $(includes) | $(objdirs)
 	$(M) CC $@
 	$(Q) $(CC) $(CPPFLAGS_ALL) $(CFLAGS_ALL) -c -o $@ $<
 

@@ -33,10 +33,7 @@
 #define alignas                _Alignas
 #define alignof                _Alignof
 #define asm                    __asm__
-#define bool                   _Bool
-#define false                  0
 #define noreturn               _Noreturn
 #define static_assert          _Static_assert
-#define true                   1
 
 #endif /* COMPILER_H */

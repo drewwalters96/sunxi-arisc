@@ -6,7 +6,7 @@
 #ifndef CTYPE_H
 #define CTYPE_H
 
-#include <compiler.h>
+#include <stdbool.h>
 
 #define isalpha(a) (((unsigned)(a) | 32) - 'a' < 26)
 #define isascii(a) ((unsigned)(a) < 128)

@@ -29,12 +29,12 @@ SECTIONS
   } >SRAM_A2
 
   .data . : ALIGN(4) SUBALIGN(4) {
-    __device_list = .;
+    device_list = .;
     KEEP(*(.device))
-    __device_list_end = .;
-    __driver_list = .;
+    device_list_end = .;
+    driver_list = .;
     KEEP(*(.driver))
-    __driver_list_end = .;
+    driver_list_end = .;
     *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
     *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.data*)))
     . = ALIGN(4);
